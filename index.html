@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Forever ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins;
+text-align:center;
+background:black;
+color:white;
+overflow:hidden;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.container{
+padding:30px;
+margin-top:40px;
+}
+
+h1{
+font-size:32px;
+color:#ff69b4;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:25px;
+background:#ff69b4;
+color:white;
+cursor:pointer;
+margin:10px;
+transition:0.3s;
+font-size:14px;
+}
+
+button:hover{
+transform:scale(1.1);
+}
+
+#slideshow img{
+width:230px;
+border-radius:20px;
+margin-top:15px;
+box-shadow:0 0 20px #ff69b4;
+}
+
+#countdown{
+margin-top:20px;
+font-size:20px;
+color:#ffd1ec;
+font-weight:600;
+}
+</style>
+</head>
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+<h1>Happy Birthday My Wifeyyy Jiii 🎂💖</h1>
+
+<p id="countdown"></p>
+
+<button onclick="toggleMusic()">Music On / Off 🎵</button>
+<button onclick="forever()">Stay Forever? 💍</button>
+
+<div id="slideshow">
+<img src="photo1.jpg">
+</div>
+
+<p style="margin-top:20px; max-width:500px; margin-left:auto; margin-right:auto;">
+My love, since 8 May 2024 you became my peace,
+my happiness, my safest place.
+Tonight at midnight the world celebrates you —
+but I celebrate you every single day. ❤️
+</p>
+
+</div>
+
+<audio id="bgmusic" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+// 🎂 PERFECT COUNTDOWN FOR 4 MARCH
+function updateCountdown() {
+
+  let now = new Date();
+  let currentYear = now.getFullYear();
+
+  // March 4 at 12:00:00 AM
+  let birthday = new Date(currentYear, 2, 4, 0, 0, 0);
+
+  // If birthday already passed this year AND today is not March 4
+  if (now > birthday && !(now.getDate() === 4 && now.getMonth() === 2)) {
+    birthday = new Date(currentYear + 1, 2, 4, 0, 0, 0);
+  }
+
+  let distance = birthday - now;
+
+  // 🎉 If today is March 4
+  if (now.getDate() === 4 && now.getMonth() === 2) {
+    document.getElementById("countdown").innerHTML =
+      "🎉 IT'S YOUR DAYYYYY MY LOVE 😭💖 HAPPY BIRTHDAYYYY 🎂✨";
+    return;
+  }
+
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  let minutes = Math.floor((distance / (1000 * 60)) % 60);
+  let seconds = Math.floor((distance / 1000) % 60);
+
+  document.getElementById("countdown").innerHTML =
+    days + " days " + hours + " hrs " +
+    minutes + " mins " + seconds + " sec until your birthday ❤️";
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+
+// 🎵 MUSIC TOGGLE
+function toggleMusic(){
+let music=document.getElementById("bgmusic");
+if(music.paused){
+music.play();
+}else{
+music.pause();
+}
+}
+
+// 💍 FOREVER BUTTON
+function forever(){
+alert("Forever with you 😘💖 No return policy 😌");
+}
+
+// 📸 SLIDESHOW
+let images=["photo1.jpg","photo2.jpg","photo3.jpg"];
+let i=0;
+setInterval(function(){
+i=(i+1)%images.length;
+document.querySelector("#slideshow img").src=images[i];
+},3000);
+
+
+// 🎆 SMOOTH FIREWORKS
+let canvas=document.getElementById("fireworks");
+let ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+setInterval(()=>{
+ctx.fillStyle="rgba(0,0,0,0.2)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+for(let i=0;i<7;i++){
+ctx.fillStyle="hsl("+Math.random()*360+",100%,60%)";
+ctx.beginPath();
+ctx.arc(Math.random()*canvas.width,
+Math.random()*canvas.height,
+5,0,Math.PI*2);
+ctx.fill();
+}
+},120);
+
+</script>
+
+</body>
+</html>
