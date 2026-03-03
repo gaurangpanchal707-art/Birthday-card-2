@@ -41,16 +41,28 @@ background:#ff69b4;
 color:white;
 cursor:pointer;
 margin:10px;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
 }
 
 #slideshow img{
-width:200px;
+width:220px;
 border-radius:20px;
 margin-top:15px;
+box-shadow:0 0 20px #ff69b4;
 }
 
+#countdown{
+margin-top:15px;
+font-size:18px;
+color:#ffd1ec;
+}
 </style>
 </head>
+
 <body>
 
 <canvas id="fireworks"></canvas>
@@ -60,18 +72,21 @@ margin-top:15px;
 
 <p id="countdown"></p>
 
-<button onclick="toggleMusic()">Music On/Off 🎵</button>
+<button onclick="toggleMusic()">Music On / Off 🎵</button>
 <button onclick="forever()">Stay Forever? 💍</button>
 
 <div id="slideshow">
 <img src="photo1.jpg">
 </div>
 
-<p>
-My love, this is your second birthday since 8 May 2024.
-And I promise to celebrate you like this forever.
-You are my heart, my peace, my everything.
+<p style="margin-top:20px; max-width:500px; margin-left:auto; margin-right:auto;">
+My love, this is your second birthday since 8 May 2024 —
+the day our forever started.  
+You are my peace, my happiness, my safest place.  
+I promise to choose you every single day.  
+Forever yours. ❤️
 </p>
+
 </div>
 
 <audio id="bgmusic" loop>
@@ -79,29 +94,58 @@ You are my heart, my peace, my everything.
 </audio>
 
 <script>
-// Countdown
-let birthday = new Date("March 10, 2026 00:00:00").getTime();
-setInterval(function(){
-let now=new Date().getTime();
-let distance=birthday-now;
-let days=Math.floor(distance/(1000*60*60*24));
-document.getElementById("countdown").innerHTML=
-days+" days until your next birthday ❤️";
-},1000);
 
-// Music toggle
+// 💖 COUNTDOWN FOR 4 MARCH (AUTO YEAR UPDATE)
+function updateCountdown() {
+  let now = new Date();
+  let currentYear = now.getFullYear();
+
+  let birthday = new Date(currentYear, 2, 4); // March 4
+
+  if (now > birthday) {
+    birthday = new Date(currentYear + 1, 2, 4);
+  }
+
+  let distance = birthday - now;
+
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  let minutes = Math.floor((distance / (1000 * 60)) % 60);
+  let seconds = Math.floor((distance / 1000) % 60);
+
+  // If today is birthday 🎉
+  if (
+    now.getDate() === 4 &&
+    now.getMonth() === 2
+  ) {
+    document.getElementById("countdown").innerHTML =
+      "🎉 IT'S YOUR DAYYYYY MY LOVE 😭💖 HAPPY BIRTHDAYYYY 🎂✨";
+  } else {
+    document.getElementById("countdown").innerHTML =
+      days + " days " + hours + " hrs " + minutes + " mins " + seconds + " sec until your next birthday ❤️";
+  }
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+
+// 🎵 MUSIC TOGGLE
 function toggleMusic(){
 let music=document.getElementById("bgmusic");
-if(music.paused){ music.play(); }
-else{ music.pause(); }
+if(music.paused){
+music.play();
+}else{
+music.pause();
+}
 }
 
-// Forever Button
+// 💍 FOREVER BUTTON
 function forever(){
-alert("Yesss! Forever with you 😘💖");
+alert("Yesss! Forever with you 😘💖 No escape now 😌");
 }
 
-// Simple slideshow
+// 📸 SLIDESHOW
 let images=["photo1.jpg","photo2.jpg","photo3.jpg"];
 let i=0;
 setInterval(function(){
@@ -109,7 +153,8 @@ i=(i+1)%images.length;
 document.querySelector("#slideshow img").src=images[i];
 },3000);
 
-// Fireworks
+
+// 🎆 FIREWORKS EFFECT
 let canvas=document.getElementById("fireworks");
 let ctx=canvas.getContext("2d");
 canvas.width=window.innerWidth;
@@ -118,7 +163,8 @@ canvas.height=window.innerHeight;
 setInterval(()=>{
 ctx.fillStyle="rgba(0,0,0,0.2)";
 ctx.fillRect(0,0,canvas.width,canvas.height);
-for(let i=0;i<5;i++){
+
+for(let i=0;i<6;i++){
 ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
 ctx.beginPath();
 ctx.arc(Math.random()*canvas.width,
@@ -127,6 +173,7 @@ Math.random()*canvas.height,
 ctx.fill();
 }
 },100);
+
 </script>
 
 </body>
