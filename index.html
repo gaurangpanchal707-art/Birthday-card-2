@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Forever ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins;
+text-align:center;
+background:black;
+color:white;
+overflow:hidden;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.container{
+padding:30px;
+margin-top:40px;
+}
+
+h1{
+font-size:30px;
+color:#ff69b4;
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#ff69b4;
+color:white;
+cursor:pointer;
+margin:10px;
+}
+
+#slideshow img{
+width:200px;
+border-radius:20px;
+margin-top:15px;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+<h1>Happy Birthday My Wifeyyy Jiii 🎂💖</h1>
+
+<p id="countdown"></p>
+
+<button onclick="toggleMusic()">Music On/Off 🎵</button>
+<button onclick="forever()">Stay Forever? 💍</button>
+
+<div id="slideshow">
+<img src="photo1.jpg">
+</div>
+
+<p>
+My love, this is your second birthday since 8 May 2024.
+And I promise to celebrate you like this forever.
+You are my heart, my peace, my everything.
+</p>
+</div>
+
+<audio id="bgmusic" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Countdown
+let birthday = new Date("March 10, 2026 00:00:00").getTime();
+setInterval(function(){
+let now=new Date().getTime();
+let distance=birthday-now;
+let days=Math.floor(distance/(1000*60*60*24));
+document.getElementById("countdown").innerHTML=
+days+" days until your next birthday ❤️";
+},1000);
+
+// Music toggle
+function toggleMusic(){
+let music=document.getElementById("bgmusic");
+if(music.paused){ music.play(); }
+else{ music.pause(); }
+}
+
+// Forever Button
+function forever(){
+alert("Yesss! Forever with you 😘💖");
+}
+
+// Simple slideshow
+let images=["photo1.jpg","photo2.jpg","photo3.jpg"];
+let i=0;
+setInterval(function(){
+i=(i+1)%images.length;
+document.querySelector("#slideshow img").src=images[i];
+},3000);
+
+// Fireworks
+let canvas=document.getElementById("fireworks");
+let ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+setInterval(()=>{
+ctx.fillStyle="rgba(0,0,0,0.2)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+for(let i=0;i<5;i++){
+ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
+ctx.beginPath();
+ctx.arc(Math.random()*canvas.width,
+Math.random()*canvas.height,
+5,0,Math.PI*2);
+ctx.fill();
+}
+},100);
+</script>
+
+</body>
+</html>
